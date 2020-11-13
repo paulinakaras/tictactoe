@@ -7,6 +7,10 @@
 }
 .cell {
     border: 1px solid black;
+    font-size: 65px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }
 .cell:nth-child(1),
 .cell:nth-child(2),
@@ -23,4 +27,11 @@
 }
 .cell:nth-child(3n) {
     border-right: none;
+}
+
+.o::after {
+    content: "\2B58";
+}
+.x::after{
+    content: "\2715";
 }
