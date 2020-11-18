@@ -1,4 +1,8 @@
-#container {
+:root {
+    --x-unicode: "\2715";
+    --o-unicode: "\2B58";
+}
+.container {
     width: 300px;
     height: 300px;
     display: grid;
@@ -28,10 +32,17 @@
 .cell:nth-child(3n) {
     border-right: none;
 }
-
-.o::after {
-    content: "\2B58";
+.container.x-hover .cell:not(.x):not(.o):hover::after {
+    content: var(--x-unicode);
+    color: lightgray;
+}
+.container.o-hover .cell:not(.x):not(.o):hover::after {
+    content: var(--o-unicode);
+    color: lightgray;
 }
 .x::after{
-    content: "\2715";
+    content: var(--x-unicode);
+}
+.o::after {
+    content: var(--o-unicode);
 }
