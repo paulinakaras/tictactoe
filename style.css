@@ -1,13 +1,16 @@
+* {
+  font-family: sans-serif;
+}
 :root {
     --x-unicode: "\2715";
     --o-unicode: "\2B58";
 }
 .container {
     width: 300px;
-    height: 300px;
+    height: 400px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr) 1fr;
 }
 .cell {
     border: 1px solid black;
@@ -45,4 +48,11 @@
 }
 .o::after {
     content: var(--o-unicode);
+}
+.winning-msg {
+    font-size: 30px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-column: 1 / 4;
 }
