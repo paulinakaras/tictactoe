@@ -19,17 +19,16 @@ let oIndexes = [];
 initGame();
 
 function initGame() {
-  container.classList.add(turnContainer);
+    container.classList.add(turnContainer);
+    
+    for(let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("click", function() {
+            handle(i);
+        }, {once : true});
+    }
 }
 
-for(let i = 0; i < cells.length; i++) {
-    cells[i].addEventListener("click", function() {
-        mark(i);
-        changeHover();
-    }, {once : true});
-}
-
-function mark(i) {
+function handle(i) {
     cells[i].classList.add(turnClass);
     if(turnClass === X_CLASS) {
         xIndexes.push(i);
@@ -40,19 +39,32 @@ function mark(i) {
         checkResult(oIndexes);
         turnClass = X_CLASS;
     }
+    changeHover();
+}
+
+function checkResult(indexes) {
+    for(let i = 0; i < WINNING_ARRAY.length; i++) {
+        if(isEndGame(WINNING_ARRAY[i], indexes)) {
+            disableCells();
+            winningMsg.innerHTML += turnClass.toUpperCase() + " wins!";
+        }
+    }
+}
+
+function isEndGame(winningArray, indexes) {
+    return indexes.includes(winningArray[0]) 
+        && indexes.includes(winningArray[1])
+        && indexes.includes(winningArray[2])
+}
+
+function disableCells() {
+    for(let i = 0; i < cells.length; i++) {
+        cells[i].style.pointerEvents = 'none';
+    }
 }
 
 function changeHover() {
     container.classList.remove(turnContainer);
     turnContainer = turnContainer === X_HOVER_CLASS ? O_HOVER_CLASS : X_HOVER_CLASS;
     container.classList.add(turnContainer);
-}
-
-function checkResult(indexes) {
-    let isEndGame = false;
-    for(let i = 0; i < WINNING_ARRAY.length; i++) {
-        if(indexes.includes(WINNING_ARRAY[i][0]) && indexes.includes(WINNING_ARRAY[i][1]) && indexes.includes(WINNING_ARRAY[i][2])){
-                winningMsg.innerHTML += turnClass.toUpperCase() + " wins!";
-         }  
-    }
 }
